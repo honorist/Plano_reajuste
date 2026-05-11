@@ -111,7 +111,7 @@ body {
 }
 /* #extra: logo maior */
 .hero .marca img {
-  width: 160px;
+  width: 200px;
   height: auto;
   flex-shrink: 0;
 }
@@ -1187,7 +1187,13 @@ html[data-tema="escuro"] .botao-download:hover { background: #1a5664; color: var
 html[data-tema="escuro"] .botao-download:hover small,
 html[data-tema="escuro"] .botao-download:hover .dl-preview { color: var(--bege-claro); }
 
-html[data-tema="escuro"] .hero .disclaimer { background: rgba(255,251,241,0.05); }
+/* Hero tem fundo azul escuro fixo — texto sempre claro, independente do tema */
+html[data-tema="escuro"] .hero { color: #fffbf1; }
+html[data-tema="escuro"] .hero h1 { color: #fffbf1; }
+html[data-tema="escuro"] .hero .subtitulo { color: #e4edf5; }
+html[data-tema="escuro"] .hero .marca .nome strong { color: #fffbf1; }
+html[data-tema="escuro"] .hero .marca .nome span { color: var(--bege-claro); }
+html[data-tema="escuro"] .hero .disclaimer { color: #fffbf1; background: rgba(255,251,241,0.05); }
 
 html[data-tema="escuro"] .toast-sucesso { background: #0e5c35; }
 html[data-tema="escuro"] .toast-info    { background: #1a5664; }
