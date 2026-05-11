@@ -794,6 +794,21 @@ function montarDadosCaso(data) {
   };
 }
 
+// ================================================================
+// TEMA (claro / escuro)
+// ================================================================
+
+(function configurarTema() {
+  const btn = document.getElementById("btn-tema");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const atual = document.documentElement.dataset.tema ?? "claro";
+    const novo = atual === "escuro" ? "claro" : "escuro";
+    document.documentElement.dataset.tema = novo;
+    localStorage.setItem("tema-plano-reajuste", novo);
+  });
+})();
+
 /**
  * @param {unknown} s
  * @returns {string}

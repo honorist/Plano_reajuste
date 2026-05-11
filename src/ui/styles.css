@@ -1042,7 +1042,7 @@ button.secundario:hover {
   .wizard-nav-direita {
     flex-direction: column;
   }
-  button {
+  button:not(.btn-tema):not(.help-btn) {
     width: 100%;
     text-align: center;
   }
@@ -1057,113 +1057,159 @@ button.secundario:hover {
 }
 
 /* ============================
-   #13 DARK MODE
+   BOTÃO TOGGLE CLARO / ESCURO
    ============================ */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --off: #0e1a26;
-    --off-fundo: #131f2d;
-    --texto: #dce8f0;
-    --texto-medio: #8fa5b8;
-    --texto-leve: #637d96;
-    --cinza-linha: #243344;
-    --cinza-fundo: #1a2839;
-    --abusivo-fundo: #2d1212;
-    --regular-fundo: #0d2518;
-    --inconclusivo-fundo: #2a1e08;
-  }
-
-  body {
-    background: var(--off);
-  }
-
-  .card {
-    background: #142030;
-    border-color: var(--cinza-linha);
-  }
-
-  label > input,
-  label > select,
-  .campo-com-ajuda input,
-  .campo-com-ajuda select {
-    background: #0e1a26;
-    border-color: var(--cinza-linha);
-    color: var(--texto);
-  }
-
-  label > input::placeholder,
-  .campo-com-ajuda input::placeholder {
-    color: var(--texto-leve);
-  }
-
-  .dica-texto {
-    background: var(--off-fundo);
-    border-color: var(--cinza-linha);
-  }
-
-  button.secundario {
-    color: var(--bege);
-    border-color: var(--bege);
-  }
-  button.secundario:hover {
-    background: var(--bege);
-    color: var(--azul-escuro);
-  }
-
-  .wp-num {
-    background: var(--cinza-fundo);
-    border-color: var(--cinza-linha);
-    color: var(--texto-leve);
-  }
-  .wp-ativa .wp-num {
-    background: var(--azul);
-    border-color: var(--azul);
-    color: #fff;
-  }
-  .wp-concluida .wp-num {
-    background: var(--regular);
-    border-color: var(--regular);
-    color: #fff;
-  }
-  .wp-sep {
-    background: var(--cinza-linha);
-  }
-
-  .resultado-card {
-    background: #142030;
-    border-color: var(--cinza-linha);
-  }
-  .scorecard {
-    background: #142030;
-    border-color: var(--cinza-linha);
-  }
-  .passos {
-    background: var(--off-fundo);
-  }
-  .passos .formula {
-    background: #0e1a26;
-  }
-
-  .botao-download {
-    background: #142030;
-    border-color: var(--azul-claro);
-  }
-  .botao-download .dl-preview {
-    color: var(--texto-leve);
-    border-top-color: var(--cinza-linha);
-  }
-  .botao-download:hover {
-    background: var(--azul);
-  }
-
-  .hero .disclaimer {
-    background: rgba(255, 251, 241, 0.05);
-  }
-
-  .toast-info {
-    background: var(--azul-claro);
-  }
+.btn-tema {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1.5px solid rgba(214, 196, 184, 0.4);
+  background: rgba(255, 251, 241, 0.1);
+  color: var(--bege-claro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
+.btn-tema:hover {
+  background: rgba(255, 251, 241, 0.2);
+  border-color: var(--bege);
+  transform: rotate(20deg);
+}
+.btn-tema:focus-visible {
+  outline: 2px solid var(--bege);
+  outline-offset: 3px;
+}
+.hero { position: relative; }
+
+/* #13 DARK MODE
+   Ativado via data-tema="escuro" no <html> — JS detecta preferência do sistema
+   e permite alternância manual pelo botão de tema. Seletores planos (sem nesting)
+   para compatibilidade máxima com browsers. */
+
+/* Variáveis do tema escuro */
+html[data-tema="escuro"] {
+  --off: #111b27;
+  --off-fundo: #162030;
+  --cinza-fundo: #1e2d3d;
+  --cinza-linha: #2a3d52;
+  --texto: #e4edf5;
+  --texto-medio: #99b4c8;
+  --texto-leve: #6b8a9e;
+  /* Cores semânticas mais claras para fundo escuro */
+  --abusivo: #f87171;
+  --abusivo-fundo: #2c1010;
+  --regular: #6ee7b7;
+  --regular-fundo: #0b2218;
+  --inconclusivo: #fbbf24;
+  --inconclusivo-fundo: #271d07;
+  /* Azul legível em fundo escuro */
+  --azul-texto: #7ecfe0;
+}
+
+html[data-tema="escuro"] body { background: var(--off); }
+
+html[data-tema="escuro"] .card,
+html[data-tema="escuro"] .resultado-card,
+html[data-tema="escuro"] .scorecard {
+  background: #1a2c3d;
+  border-color: var(--cinza-linha);
+}
+
+html[data-tema="escuro"] label > input,
+html[data-tema="escuro"] label > select,
+html[data-tema="escuro"] .campo-com-ajuda input,
+html[data-tema="escuro"] .campo-com-ajuda select {
+  background: #111b27;
+  border-color: var(--cinza-linha);
+  color: var(--texto);
+}
+html[data-tema="escuro"] label > input::placeholder,
+html[data-tema="escuro"] .campo-com-ajuda input::placeholder { color: var(--texto-leve); }
+
+html[data-tema="escuro"] .dica-texto {
+  background: var(--off-fundo);
+  border-color: var(--cinza-linha);
+  color: var(--texto-medio);
+}
+
+html[data-tema="escuro"] button.secundario { color: var(--bege-claro); border-color: var(--bege); }
+html[data-tema="escuro"] button.secundario:hover { background: var(--bege); color: var(--azul-escuro); }
+
+/* Wizard progress */
+html[data-tema="escuro"] .wp-num { background: var(--cinza-fundo); border-color: var(--cinza-linha); color: var(--texto-leve); }
+html[data-tema="escuro"] .wp-texto { color: var(--texto-leve); }
+html[data-tema="escuro"] .wp-ativa .wp-num { background: #1a5664; border-color: #1a5664; color: #fff; }
+html[data-tema="escuro"] .wp-ativa .wp-texto { color: var(--azul-texto); }
+html[data-tema="escuro"] .wp-concluida .wp-num { background: #0e5c35; border-color: #0e5c35; color: #fff; }
+html[data-tema="escuro"] .wp-concluida .wp-texto { color: var(--regular); }
+html[data-tema="escuro"] .wp-sep { background: var(--cinza-linha); }
+
+/* Títulos com var(--azul) ficam invisíveis no escuro */
+html[data-tema="escuro"] .card legend,
+html[data-tema="escuro"] .scorecard-titulo,
+html[data-tema="escuro"] .resultado-card-corpo h3,
+html[data-tema="escuro"] .passos h4,
+html[data-tema="escuro"] .passos summary { color: var(--azul-texto); }
+html[data-tema="escuro"] .passos summary:hover { color: #a8e0ee; }
+
+html[data-tema="escuro"] .passos { background: #162030; }
+html[data-tema="escuro"] .passos .formula { background: #111b27; border-left-color: #2a3d52; }
+html[data-tema="escuro"] .passos details { border-bottom-color: #2a3d52; }
+html[data-tema="escuro"] .passos .descricao { color: var(--texto-medio); }
+
+/* Alertas — cores hardcoded precisam de override */
+html[data-tema="escuro"] .alerta-info    { color: var(--regular); }
+html[data-tema="escuro"] .alerta-atencao { color: var(--inconclusivo); }
+html[data-tema="escuro"] .alerta-critico { color: var(--abusivo); }
+
+html[data-tema="escuro"] .veredito-topo-regular    { border-bottom-color: rgba(110,231,183,0.2); }
+html[data-tema="escuro"] .veredito-topo-abusivo    { border-bottom-color: rgba(248,113,113,0.2); }
+html[data-tema="escuro"] .veredito-topo-inconclusivo { border-bottom-color: rgba(251,191,36,0.2); }
+
+html[data-tema="escuro"] .scorecard-item.veredito-regular { background: #0b2218; }
+html[data-tema="escuro"] .scorecard-item.veredito-abusivo { background: #2c1010; }
+html[data-tema="escuro"] .scorecard-item.veredito-inconclusivo { background: #271d07; }
+
+html[data-tema="escuro"] .botao-download { background: #1a2c3d; border-color: #1a5664; color: var(--texto-medio); }
+html[data-tema="escuro"] .botao-download small { color: var(--texto-leve); }
+html[data-tema="escuro"] .botao-download .dl-preview { color: var(--texto-leve); border-top-color: var(--cinza-linha); }
+html[data-tema="escuro"] .botao-download:hover { background: #1a5664; color: var(--off); }
+html[data-tema="escuro"] .botao-download:hover small,
+html[data-tema="escuro"] .botao-download:hover .dl-preview { color: var(--bege-claro); }
+
+html[data-tema="escuro"] .hero .disclaimer { background: rgba(255,251,241,0.05); }
+
+html[data-tema="escuro"] .toast-sucesso { background: #0e5c35; }
+html[data-tema="escuro"] .toast-info    { background: #1a5664; }
+html[data-tema="escuro"] .toast-erro    { background: #7f1d1d; }
+
+html[data-tema="escuro"] input[aria-invalid="true"],
+html[data-tema="escuro"] select[aria-invalid="true"] { border-color: var(--abusivo) !important; background-color: #2c1010; }
+
+html[data-tema="escuro"] #status-cep:not(:empty) { background: var(--off-fundo); border-left-color: var(--azul-texto); color: var(--texto-medio); }
+html[data-tema="escuro"] #status-cep[data-estado="sucesso"] { background: var(--regular-fundo); border-left-color: var(--regular); color: var(--regular); }
+html[data-tema="escuro"] #status-cep[data-estado="erro"]    { background: var(--abusivo-fundo); border-left-color: var(--abusivo); color: var(--abusivo); }
+
+html[data-tema="escuro"] .erro-validacao { background: var(--abusivo-fundo); color: var(--abusivo); border-left-color: var(--abusivo); }
+
+html[data-tema="escuro"] .help-btn { border-color: var(--azul-texto); color: var(--azul-texto); }
+html[data-tema="escuro"] .help-btn:hover { background: #1a2c3d; border-color: #a8e0ee; color: #a8e0ee; }
+
+/* Ícone do botão de tema */
+html[data-tema="escuro"] .btn-tema .icon-sol  { display: inline; }
+html[data-tema="escuro"] .btn-tema .icon-lua  { display: none; }
+html[data-tema="claro"]  .btn-tema .icon-sol  { display: none; }
+html[data-tema="claro"]  .btn-tema .icon-lua  { display: inline; }
 
 /* ============================
    #14 PRINT
@@ -1174,6 +1220,7 @@ button.secundario:hover {
   .wizard-nav,
   .downloads,
   .btn-nova-analise-wrap,
+  .btn-tema,
   #toast-container,
   .rodape-contatos { display: none !important; }
 

@@ -10,12 +10,23 @@
     />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="icon" type="image/png" href="./logo-azul.png" />
+    <script>
+      (function(){
+        var t = localStorage.getItem('tema-plano-reajuste');
+        var dark = t === 'escuro' || (!t && window.matchMedia('(prefers-color-scheme:dark)').matches);
+        document.documentElement.dataset.tema = dark ? 'escuro' : 'claro';
+      })();
+    </script>
   </head>
   <body>
     <!-- #15 Skip link para acessibilidade -->
     <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
 
     <header class="hero">
+      <button id="btn-tema" class="btn-tema" type="button" aria-label="Alternar modo claro/escuro">
+        <span class="icon-sol" aria-hidden="true">☀</span>
+        <span class="icon-lua" aria-hidden="true">🌙</span>
+      </button>
       <div class="container">
         <div class="marca">
           <!-- Logo maior (#extra) -->
