@@ -43,9 +43,9 @@ function salvarForm() {
     const data = new FormData(form);
     /** @type {Record<string, string>} */
     const obj = {};
-    for (const [k, v] of data.entries()) {
-      obj[/** @type {string} */ (k)] = String(v);
-    }
+    data.forEach((v, k) => {
+      obj[k] = String(v);
+    });
     // Checkboxes não marcados não aparecem no FormData
     form.querySelectorAll("input[type=checkbox]").forEach((/** @type {Element} */ el) => {
       const cb = /** @type {HTMLInputElement} */ (el);
