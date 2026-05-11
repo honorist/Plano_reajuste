@@ -1,0 +1,35 @@
+{
+  "norma": "Resolução Normativa ANS nº 63, de 22 de dezembro de 2003",
+  "fonte_oficial": "https://www.gov.br/ans/pt-br/assuntos/operadoras/reajustes-tecnicos/reajuste-por-faixa-etaria",
+  "aplicacao_temporal": "Contratos celebrados a partir de 01/01/2004. Contratos anteriores (Lei 9.656/98 não adaptados) seguem regras próprias (RN 06/1998 ou contratuais).",
+  "ultima_atualizacao": "2025-01-01",
+  "faixas": [
+    { "id": 1, "min": 0, "max": 18, "rotulo": "0 a 18 anos" },
+    { "id": 2, "min": 19, "max": 23, "rotulo": "19 a 23 anos" },
+    { "id": 3, "min": 24, "max": 28, "rotulo": "24 a 28 anos" },
+    { "id": 4, "min": 29, "max": 33, "rotulo": "29 a 33 anos" },
+    { "id": 5, "min": 34, "max": 38, "rotulo": "34 a 38 anos" },
+    { "id": 6, "min": 39, "max": 43, "rotulo": "39 a 43 anos" },
+    { "id": 7, "min": 44, "max": 48, "rotulo": "44 a 48 anos" },
+    { "id": 8, "min": 49, "max": 53, "rotulo": "49 a 53 anos" },
+    { "id": 9, "min": 54, "max": 58, "rotulo": "54 a 58 anos" },
+    { "id": 10, "min": 59, "max": null, "rotulo": "59 anos ou mais" }
+  ],
+  "regras": [
+    {
+      "id": "regra_6x",
+      "fundamento": "RN 63/2003, art. 3º, inciso I",
+      "enunciado": "O valor fixado para a 10ª faixa etária não poderá ser superior a 6 (seis) vezes o valor da 1ª faixa etária."
+    },
+    {
+      "id": "regra_variacao_acumulada",
+      "fundamento": "RN 63/2003, art. 3º, inciso II",
+      "enunciado": "A variação acumulada entre a 7ª e a 10ª faixas etárias não poderá ser superior à variação acumulada entre a 1ª e a 7ª faixas etárias. A variação acumulada é calculada pela razão entre o valor final e o valor inicial — não por simples soma aritmética de percentuais (Tema 1016 STJ; IRDR 11 TJSP)."
+    },
+    {
+      "id": "regra_idoso",
+      "fundamento": "Lei 10.741/2003 (Estatuto da Pessoa Idosa), art. 15, §3º; Súmula 91 STJ; decisão do STF de 2025",
+      "enunciado": "É vedado o reajuste de mensalidade por mudança de faixa etária para beneficiários com 60 anos ou mais em contratos celebrados a partir de 01/01/2004. O STF, em 2025, estendeu a proteção a contratos anteriores nos casos em que o beneficiário tenha 10 ou mais anos no mesmo plano."
+    }
+  ]
+}

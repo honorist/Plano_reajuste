@@ -1,0 +1,38 @@
+{
+  "name": "plano-reajuste",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Sistema de análise de reajuste abusivo de plano de saúde conforme metodologia ANS, com geração de documentos jurídicos (petição, relatório técnico, planilha pericial e resumo executivo).",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/honorist/Plano_reajuste"
+  },
+  "homepage": "https://honorist.github.io/Plano_reajuste/",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit -p jsconfig.json",
+    "lint": "echo 'lint placeholder — adicionar eslint posteriormente'",
+    "build": "node scripts/build.js",
+    "dev": "node scripts/dev.js"
+  },
+  "dependencies": {
+    "decimal.js": "^10.4.3",
+    "docx": "^9.6.1",
+    "exceljs": "^4.4.0",
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.9",
+    "esbuild": "^0.24.2",
+    "pizzip": "^3.2.0",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.9"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

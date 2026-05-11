@@ -1,0 +1,64 @@
+{
+  "fonte_oficial": "https://www.gov.br/ans/pt-br/assuntos/consumidor/reajuste-variacao-de-mensalidade/reajuste-anual-de-planos-individuais-familiares-1/metodologia-de-calculo",
+  "metodologia": "Reajuste = (80% * IVDA) + (20% * IPCA expurgado). IVDA = Variação da Despesa Assistencial (VDA) deduzido o Fator de Ganho de Eficiência (FGE) e a Variação por Faixa Etária (VFE). IPCA expurgado exclui o item Saúde e Cuidados Pessoais para evitar dupla contagem.",
+  "aplicacao": "Aplicável a planos individuais ou familiares contratados a partir de 02/01/1999 ou adaptados à Lei 9.656/98. O percentual incide no mês de aniversário do contrato.",
+  "ultima_atualizacao": "2025-05-01",
+  "ciclos": [
+    {
+      "inicio": "2018-05",
+      "fim": "2019-04",
+      "percentual": 10.00,
+      "ato_normativo": "Comunicado ANS nº 75/2018",
+      "observacao": null
+    },
+    {
+      "inicio": "2019-05",
+      "fim": "2020-04",
+      "percentual": 7.35,
+      "ato_normativo": "Comunicado ANS nº 82/2019",
+      "observacao": null
+    },
+    {
+      "inicio": "2020-05",
+      "fim": "2021-04",
+      "percentual": 8.14,
+      "ato_normativo": "Comunicado ANS de 2020 (com base em Nota Técnica DIRAD-DIPRO)",
+      "observacao": "Aplicação suspensa entre setembro e dezembro de 2020 por força da Resolução Normativa nº 4.538/2020; cobrança retroativa autorizada em 2021."
+    },
+    {
+      "inicio": "2021-05",
+      "fim": "2022-04",
+      "percentual": -8.19,
+      "ato_normativo": "Comunicado ANS de 2021",
+      "observacao": "Único redutor da história. As operadoras estavam obrigadas a aplicar o índice negativo."
+    },
+    {
+      "inicio": "2022-05",
+      "fim": "2023-04",
+      "percentual": 15.50,
+      "ato_normativo": "Comunicado ANS de 2022",
+      "observacao": "Maior reajuste histórico, compensando o redutor do ano anterior e a alta sinistralidade pós-pandemia."
+    },
+    {
+      "inicio": "2023-05",
+      "fim": "2024-04",
+      "percentual": 9.63,
+      "ato_normativo": "Comunicado ANS de 2023",
+      "observacao": null
+    },
+    {
+      "inicio": "2024-05",
+      "fim": "2025-04",
+      "percentual": 6.91,
+      "ato_normativo": "Comunicado ANS de 2024",
+      "observacao": null
+    },
+    {
+      "inicio": "2025-05",
+      "fim": "2026-04",
+      "percentual": 6.06,
+      "ato_normativo": "Comunicado ANS de 2025",
+      "observacao": "Ciclo vigente."
+    }
+  ]
+}

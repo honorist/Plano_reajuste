@@ -1,0 +1,15 @@
+node_modules/
+dist/
+coverage/
+tests/output/
+.vitest-cache/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.local
+.idea/
+.vscode/
+!.vscode/settings.json
+
+.git-commit-msg.tmp

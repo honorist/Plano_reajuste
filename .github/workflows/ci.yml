@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Testes + cobertura + typecheck
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        timezone: [UTC, America/Sao_Paulo]
+
+    env:
+      TZ: ${{ matrix.timezone }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Verificar tipagem (tsc --noEmit)
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Testes + cobertura
+        run: npm run test:coverage
+
+      - name: Upload do relatório de cobertura
+        if: matrix.timezone == 'America/Sao_Paulo'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 30

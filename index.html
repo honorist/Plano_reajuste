@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Juliana Ramos Advocacia — Análise de Reajuste de Plano de Saúde</title>
+    <meta
+      name="description"
+      content="Verifique gratuitamente se o reajuste do seu plano de saúde está dentro do limite autorizado pela ANS e da jurisprudência do STJ e STF. Análise técnica em segundos, 100% no seu navegador."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/png" href="./logo-azul.png" />
+  </head>
+  <body>
+    <!-- #15 Skip link para acessibilidade -->
+    <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo</a>
+
+    <header class="hero">
+      <div class="container">
+        <div class="marca">
+          <!-- Logo maior (#extra) -->
+          <img
+            src="./logo-branco.png"
+            alt="Juliana Ramos Advocacia & Consultoria Jurídica"
+          />
+          <div class="nome">
+            <strong>Juliana Ramos</strong>
+            <span>Advocacia &amp; Consultoria Jurídica</span>
+          </div>
+        </div>
+
+        <h1>Análise de Reajuste de Plano de Saúde</h1>
+
+        <!-- Subtítulo centralizado (#extra) -->
+        <p class="subtitulo">
+          Verifique se o reajuste aplicado pela operadora está dentro do limite
+          autorizado pela <strong>ANS</strong> e da jurisprudência do
+          <strong>STJ</strong> e <strong>STF</strong>.<br />
+          Análise técnica em segundos, com fundamentação jurídica completa.
+        </p>
+
+        <div class="badges" role="list" aria-label="Selos de conformidade">
+          <span class="badge" role="listitem">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Dados não saem do navegador
+          </span>
+          <span class="badge" role="listitem">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 12 2 2 4-4"/>
+              <path d="M21 12c-1 0-3-1-3-3s2-3 3-3-1-3-3-3-3 2-3 3-1-3-3-3-3 1-3 3 2 3 3 3-1 3-3 3-3-1-3-3-1 3 3 3 3 2 3 3 1 3 3 3 3-2 3-3 1 3 3 3 3-1 3-3-2-3-3-3z"/>
+            </svg>
+            Conformidade LGPD
+          </span>
+          <span class="badge" role="listitem">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Metodologia ANS oficial
+          </span>
+        </div>
+
+        <p class="disclaimer">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+            <path d="M12 9v4"/>
+            <path d="M12 17h.01"/>
+          </svg>
+          <span>
+            Esta ferramenta <strong>não substitui</strong> consultoria jurídica.
+            Os resultados são indícios técnicos sujeitos a confirmação por
+            advogado(a) habilitado(a).
+          </span>
+        </p>
+      </div>
+    </header>
+
+    <main class="container" id="app">
+      <div id="conteudo-principal" tabindex="-1">
+
+        <!-- #1 Progress bar do wizard -->
+        <nav class="wizard-progress" aria-label="Progresso do formulário">
+          <ol class="wp-lista">
+            <li class="wp-item wp-ativa" data-step="1" aria-current="step">
+              <span class="wp-num" aria-hidden="true">1</span>
+              <span class="wp-texto">Seus dados</span>
+            </li>
+            <li class="wp-sep" aria-hidden="true"></li>
+            <li class="wp-item" data-step="2">
+              <span class="wp-num" aria-hidden="true">2</span>
+              <span class="wp-texto">Contrato</span>
+            </li>
+            <li class="wp-sep" aria-hidden="true"></li>
+            <li class="wp-item" data-step="3">
+              <span class="wp-num" aria-hidden="true">3</span>
+              <span class="wp-texto">Análise</span>
+            </li>
+          </ol>
+        </nav>
+
+        <form id="form-analise" novalidate>
+
+          <!-- ===== PASSO 1: DADOS PESSOAIS ===== -->
+          <div class="wizard-passo" data-step="1">
+            <fieldset class="card">
+              <legend>Quem é você</legend>
+              <div class="grid-2">
+                <label>
+                  Seu nome completo
+                  <input name="nome" required placeholder="Ex.: João da Silva" autocomplete="name" />
+                </label>
+                <label>
+                  CPF
+                  <input
+                    name="cpf"
+                    id="cpf"
+                    required
+                    inputmode="numeric"
+                    placeholder="000.000.000-00"
+                    maxlength="14"
+                    autocomplete="off"
+                  />
+                </label>
+                <label>
+                  Data de nascimento
+                  <input name="dataNascimento" type="date" required autocomplete="bday" />
+                </label>
+                <label>
+                  CEP
+                  <input
+                    name="cep"
+                    id="cep"
+                    required
+                    inputmode="numeric"
+                    placeholder="00000-000"
+                    maxlength="9"
+                    autocomplete="postal-code"
+                  />
+                </label>
+                <label>
+                  Logradouro
+                  <input
+                    name="logradouro"
+                    id="logradouro"
+                    required
+                    placeholder="Ex.: Rua das Acácias"
+                  />
+                </label>
+                <label>
+                  Número e complemento
+                  <input
+                    name="numero"
+                    id="numero"
+                    required
+                    placeholder="Ex.: 123, ap. 45"
+                  />
+                </label>
+                <label>
+                  Bairro
+                  <input name="bairro" id="bairro" placeholder="Ex.: Centro" />
+                </label>
+                <label>
+                  Cidade
+                  <input name="cidade" id="cidade" placeholder="Ex.: São Paulo" />
+                </label>
+                <label>
+                  UF
+                  <input
+                    name="uf"
+                    id="uf"
+                    maxlength="2"
+                    placeholder="SP"
+                    style="text-transform:uppercase"
+                  />
+                </label>
+              </div>
+              <p
+                id="status-cep"
+                class="ajuda"
+                role="status"
+                aria-live="polite"
+                style="margin:0.3rem 0 0"
+              ></p>
+            </fieldset>
+          </div>
+
+          <!-- ===== PASSO 2: OPERADORA E CONTRATO ===== -->
+          <div class="wizard-passo" data-step="2" hidden>
+            <fieldset class="card">
+              <legend>Sobre a operadora e o contrato</legend>
+              <div class="grid-2">
+                <!-- #9 Datalist de operadoras -->
+                <label>
+                  Nome da operadora
+                  <input
+                    name="operadoraNome"
+                    required
+                    list="dl-operadoras"
+                    placeholder="Ex.: Unimed Exemplo Ltda."
+                  />
+                </label>
+                <label>
+                  CNPJ da operadora
+                  <input
+                    name="operadoraCnpj"
+                    id="cnpj"
+                    inputmode="numeric"
+                    placeholder="00.000.000/0000-00"
+                    maxlength="18"
+                  />
+                </label>
+                <!-- #6 Tooltip no Registro ANS -->
+                <div class="campo-com-ajuda">
+                  <label for="ans">
+                    Registro ANS
+                    <button
+                      type="button"
+                      class="help-btn"
+                      aria-controls="dica-ans"
+                      aria-expanded="false"
+                      aria-label="Ajuda sobre Registro ANS"
+                    >?</button>
+                  </label>
+                  <span id="dica-ans" class="dica-texto" hidden>
+                    Número de 6 a 7 dígitos que identifica a operadora perante a ANS.
+                    Você encontra na carteira do plano ou em ans.gov.br/beneficiarios.
+                  </span>
+                  <input
+                    name="operadoraAns"
+                    id="ans"
+                    inputmode="numeric"
+                    placeholder="000000-0"
+                    maxlength="8"
+                  />
+                </div>
+                <label>
+                  Número do contrato
+                  <input name="contratoNumero" placeholder="Ex.: 12345678" />
+                </label>
+                <label>
+                  Data de assinatura do contrato
+                  <input name="dataAssinatura" type="date" required />
+                </label>
+                <label>
+                  Modalidade do plano
+                  <select name="tipoContrato" id="tipo-contrato" required>
+                    <option value="individual">Individual</option>
+                    <option value="familiar">Familiar</option>
+                    <option value="coletivo_empresarial">Coletivo empresarial</option>
+                    <option value="coletivo_adesao">Coletivo por adesão</option>
+                  </select>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- ===== PASSO 3: MÓDULOS DE ANÁLISE ===== -->
+          <div class="wizard-passo" data-step="3" hidden>
+
+            <!-- #11 Ícone + #8 disable visual -->
+            <fieldset class="card" id="bloco-modulo1">
+              <legend>
+                <label class="switch">
+                  <input type="checkbox" name="analisarModulo1" checked />
+                  <svg aria-hidden="true" class="modulo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                    <line x1="16" x2="16" y1="2" y2="6"/>
+                    <line x1="8" x2="8" y1="2" y2="6"/>
+                    <line x1="3" x2="21" y1="10" y2="10"/>
+                  </svg>
+                  Reajuste anual (Módulo 1)
+                </label>
+              </legend>
+              <p class="ajuda">
+                Compara o percentual aplicado com o teto autorizado pela ANS no mês
+                de aniversário do contrato. Válido para planos individuais e familiares.
+              </p>
+              <div class="grid-2">
+                <!-- #6 Tooltip + #7 texto auxiliar -->
+                <div class="campo-com-ajuda">
+                  <label for="mesAniversario">
+                    Mês do reajuste
+                    <button
+                      type="button"
+                      class="help-btn"
+                      aria-controls="dica-mes"
+                      aria-expanded="false"
+                      aria-label="Ajuda sobre mês do reajuste"
+                    >?</button>
+                  </label>
+                  <span id="dica-mes" class="dica-texto" hidden>
+                    Mês em que a operadora aplicou o aumento anual — geralmente consta
+                    na carta de reajuste ou na fatura do mês com o valor mais alto.
+                  </span>
+                  <input name="mesAniversario" id="mesAniversario" type="month" />
+                </div>
+                <label>
+                  Mensalidade ANTERIOR ao reajuste
+                  <input
+                    name="mensalidadeAnterior"
+                    id="mensalidadeAnterior"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="R$ 0,00"
+                  />
+                </label>
+                <label>
+                  Mensalidade APÓS o reajuste
+                  <input
+                    name="mensalidadeAplicada"
+                    id="mensalidadeAplicada"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="R$ 0,00"
+                  />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="card modulo-desativado" id="bloco-modulo2">
+              <legend>
+                <label class="switch">
+                  <input type="checkbox" name="analisarModulo2" />
+                  <svg aria-hidden="true" class="modulo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  Mudança de faixa etária (Módulo 2)
+                </label>
+              </legend>
+              <p class="ajuda">
+                Valida as regras da RN ANS nº 63/2003: limite de 6×, variação acumulada
+                das faixas 7–10 e vedação de reajuste pós-60 anos (Estatuto do Idoso).
+              </p>
+              <div class="grid-2">
+                <div class="campo-com-ajuda">
+                  <label for="valorFaixa1">
+                    Valor da 1ª faixa (0–18 anos)
+                    <button
+                      type="button"
+                      class="help-btn"
+                      aria-controls="dica-faixas"
+                      aria-expanded="false"
+                      aria-label="Ajuda sobre faixas etárias"
+                    >?</button>
+                  </label>
+                  <span id="dica-faixas" class="dica-texto" hidden>
+                    Mensalidade vigente em cada faixa. Solicite o histórico de mensalidades
+                    à operadora ou verifique nas faturas antigas.
+                  </span>
+                  <input name="valorFaixa1" id="valorFaixa1" type="text" inputmode="decimal" placeholder="R$ 0,00" disabled />
+                </div>
+                <label>
+                  Valor da 7ª faixa (44–48 anos)
+                  <input name="valorFaixa7" id="valorFaixa7" type="text" inputmode="decimal" placeholder="R$ 0,00" disabled />
+                </label>
+                <label>
+                  Valor da 10ª faixa (59+ anos)
+                  <input name="valorFaixa10" id="valorFaixa10" type="text" inputmode="decimal" placeholder="R$ 0,00" disabled />
+                </label>
+                <label>
+                  Anos no mesmo contrato
+                  <input name="anosNoPlano" type="number" min="0" inputmode="numeric" placeholder="Ex.: 12" disabled />
+                </label>
+              </div>
+              <label class="switch">
+                <input type="checkbox" name="houveReajusteApos60" disabled />
+                Houve aumento por mudança de faixa após os 60 anos
+              </label>
+            </fieldset>
+
+            <fieldset class="card modulo-desativado" id="bloco-modulo3">
+              <legend>
+                <label class="switch">
+                  <input type="checkbox" name="analisarModulo3" />
+                  <svg aria-hidden="true" class="modulo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/>
+                    <path d="M9 22v-4h6v4"/>
+                    <path d="M8 6h.01"/><path d="M16 6h.01"/>
+                    <path d="M12 6h.01"/><path d="M12 10h.01"/>
+                    <path d="M12 14h.01"/><path d="M16 10h.01"/>
+                    <path d="M16 14h.01"/><path d="M8 10h.01"/>
+                    <path d="M8 14h.01"/>
+                  </svg>
+                  Falso coletivo (Módulo 3)
+                </label>
+              </legend>
+              <p class="ajuda">
+                Detecta se o coletivo deve ser equiparado a individual (Temas 952 e 1016 do STJ).
+                Aplicável apenas a contratos coletivos.
+              </p>
+              <div class="campo-com-ajuda" style="max-width:300px">
+                <label for="numeroVidas">
+                  Número de vidas no plano
+                  <button
+                    type="button"
+                    class="help-btn"
+                    aria-controls="dica-vidas"
+                    aria-expanded="false"
+                    aria-label="Ajuda sobre número de vidas"
+                  >?</button>
+                </label>
+                <span id="dica-vidas" class="dica-texto" hidden>
+                  Total de beneficiários (titulares + dependentes).
+                  Consta no contrato ou na carteira da operadora.
+                </span>
+                <input name="numeroVidas" id="numeroVidas" type="number" min="1" inputmode="numeric" placeholder="Ex.: 30" disabled />
+              </div>
+              <label class="switch">
+                <input type="checkbox" name="todosParentes" disabled />
+                Todos os beneficiários são parentes
+              </label>
+              <label class="switch">
+                <input type="checkbox" name="vinculoEmpresarialReal" checked disabled />
+                Existe vínculo empresarial real (CNPJ ativo, atividade econômica)
+              </label>
+              <label class="switch">
+                <input type="checkbox" name="estipulantePjFamilia" disabled />
+                O estipulante é PJ criada apenas para contratar o plano
+              </label>
+            </fieldset>
+
+            <fieldset class="card modulo-desativado" id="bloco-modulo4">
+              <legend>
+                <label class="switch">
+                  <input type="checkbox" name="analisarModulo4" />
+                  <svg aria-hidden="true" class="modulo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" x2="18" y1="20" y2="4"/>
+                    <line x1="12" x2="12" y1="20" y2="10"/>
+                    <line x1="6" x2="6" y1="20" y2="16"/>
+                  </svg>
+                  Reajuste por sinistralidade (Módulo 4)
+                </label>
+              </legend>
+              <p class="ajuda">
+                Avalia se o reajuste por sinistralidade em planos coletivos está justificado
+                conforme a RN ANS nº 389/2015.
+              </p>
+              <div class="grid-2">
+                <label>
+                  Percentual aplicado (%)
+                  <input name="percentualSinistralidade" type="number" step="0.01" placeholder="Ex.: 18,5" disabled />
+                </label>
+                <label>
+                  Sinistralidade ano anterior (%)
+                  <input name="sinistralidadeAnoA" type="number" step="0.01" placeholder="Ex.: 82,3" disabled />
+                </label>
+                <label>
+                  Sinistralidade ano atual (%)
+                  <input name="sinistralidadeAnoB" type="number" step="0.01" placeholder="Ex.: 91,7" disabled />
+                </label>
+              </div>
+              <label class="switch">
+                <input type="checkbox" name="documentacaoFornecida" checked disabled />
+                A operadora forneceu memória de cálculo
+              </label>
+              <label class="switch">
+                <input type="checkbox" name="formulaExplicita" checked disabled />
+                O contrato traz fórmula explícita de sinistralidade
+              </label>
+            </fieldset>
+
+          </div><!-- /wizard-passo step 3 -->
+
+          <!-- #1 Wizard navigation -->
+          <div class="wizard-nav">
+            <button type="button" class="secundario" id="btn-anterior" hidden>‹ Anterior</button>
+            <div class="wizard-nav-direita">
+              <button type="button" class="primario" id="btn-proximo">Próximo ›</button>
+              <button type="submit" class="primario" id="btn-analisar" hidden>Analisar agora</button>
+              <button type="reset" class="secundario" id="btn-limpar">Limpar</button>
+            </div>
+          </div>
+
+        </form>
+      </div><!-- /conteudo-principal -->
+
+      <section id="resultados" hidden aria-live="polite" aria-atomic="false"></section>
+    </main>
+
+    <footer class="rodape">
+      <div class="container">
+        <strong>Juliana Ramos Advocacia &amp; Consultoria Jurídica</strong>
+        <p>Ferramenta gratuita de análise técnica · 100% client-side · Conformidade LGPD por design</p>
+        <!-- Contatos (#extra) -->
+        <div class="rodape-contatos">
+          <a href="mailto:contato@julianaramosadvocacia.com.br" class="rodape-link">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            contato@julianaramosadvocacia.com.br
+          </a>
+          <a href="https://wa.me/5531990056172" target="_blank" rel="noopener" class="rodape-link">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.1a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.7 16v.92z"/>
+            </svg>
+            +55 31 9905-6172
+          </a>
+          <a href="https://instagram.com/julianapirl" target="_blank" rel="noopener" class="rodape-link">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+            </svg>
+            @julianapirl
+          </a>
+          <a href="https://julianaramosadvocacia.com.br/home/" target="_blank" rel="noopener" class="rodape-link">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" x2="22" y1="12" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            julianaramosadvocacia.com.br
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- #19 Container de toasts -->
+    <div id="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- #9 Datalist de operadoras comuns -->
+    <datalist id="dl-operadoras">
+      <option value="Unimed"></option>
+      <option value="Bradesco Saúde"></option>
+      <option value="Amil"></option>
+      <option value="SulAmérica Saúde"></option>
+      <option value="Hapvida"></option>
+      <option value="NotreDame Intermédica"></option>
+      <option value="Porto Seguro Saúde"></option>
+      <option value="Care Plus"></option>
+      <option value="Prevent Senior"></option>
+      <option value="Omint"></option>
+      <option value="Cassi"></option>
+      <option value="Geap Saúde"></option>
+      <option value="Itaú Saúde"></option>
+      <option value="Mediservice"></option>
+      <option value="Golden Cross"></option>
+      <option value="Fusex"></option>
+      <option value="São Cristóvão Saúde"></option>
+      <option value="Unafisco Saúde"></option>
+    </datalist>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

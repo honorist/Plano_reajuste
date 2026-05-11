@@ -1,0 +1,80 @@
+{
+  "ultima_atualizacao": "2026-01-01",
+  "normas": {
+    "lei_9656_98": {
+      "norma": "Lei nº 9.656, de 03/06/1998",
+      "ementa": "Dispõe sobre os planos e seguros privados de assistência à saúde.",
+      "artigos_chave": {
+        "art_35_E": "Os contratos celebrados na vigência desta Lei dependem de prévia autorização da ANS para reajuste de mensalidade, salvo nos casos previstos em norma específica."
+      },
+      "link": "https://www.planalto.gov.br/ccivil_03/leis/l9656.htm"
+    },
+    "lei_10741_03": {
+      "norma": "Lei nº 10.741, de 01/10/2003 — Estatuto da Pessoa Idosa",
+      "ementa": "Dispõe sobre o Estatuto da Pessoa Idosa.",
+      "artigos_chave": {
+        "art_15_§3": "É vedada a discriminação do idoso nos planos de saúde pela cobrança de valores diferenciados em razão da idade."
+      },
+      "link": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.741.htm"
+    },
+    "cdc": {
+      "norma": "Lei nº 8.078, de 11/09/1990 — Código de Defesa do Consumidor",
+      "ementa": "Dispõe sobre a proteção do consumidor.",
+      "artigos_chave": {
+        "art_42_paragrafo_unico": "O consumidor cobrado em quantia indevida tem direito à repetição do indébito, por valor igual ao dobro do que pagou em excesso, acrescido de correção monetária e juros legais, salvo hipótese de engano justificável.",
+        "art_51_IV": "São nulas de pleno direito as cláusulas que estabeleçam obrigações iníquas, abusivas, ou que coloquem o consumidor em desvantagem exagerada."
+      },
+      "link": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm"
+    },
+    "rn_63_2003": {
+      "norma": "Resolução Normativa ANS nº 63, de 22/12/2003",
+      "ementa": "Define os limites para a variação de preço por mudança de faixa etária em planos privados de assistência à saúde.",
+      "link": "https://www.ans.gov.br/component/legislacao/?view=legislacao&task=textoLei&format=raw&id=787"
+    },
+    "rn_389_2015": {
+      "norma": "Resolução Normativa ANS nº 389, de 26/11/2015",
+      "ementa": "Dispõe sobre a transparência das informações em planos coletivos.",
+      "artigos_chave": {
+        "art_14": "A operadora deve disponibilizar aos contratantes dos planos coletivos, com pelo menos 30 dias de antecedência, memória de cálculo do reajuste e metodologia utilizada."
+      },
+      "link": "https://www.ans.gov.br/component/legislacao/?view=legislacao&task=TextoLei&format=raw&id=3115"
+    },
+    "sumula_3_ans": {
+      "norma": "Súmula Normativa nº 3, de 02/02/2001 — ANS",
+      "ementa": "A cobrança de mensalidades de planos de saúde deve ser feita em valores claros e expressos no contrato. A cláusula de reajuste deve estar redigida de forma compreensível ao consumidor.",
+      "link": "https://www.ans.gov.br/component/legislacao/?view=legislacao&task=textoLei&format=raw&id=410"
+    }
+  },
+  "jurisprudencia": {
+    "tema_952_stj": {
+      "tribunal": "STJ",
+      "tema": "Tema Repetitivo 952",
+      "leading_case": "REsp 1.568.244-RJ",
+      "tese": "O reajuste de mensalidade de plano de saúde individual ou familiar fundado na mudança de faixa etária do beneficiário é válido desde que: (i) haja previsão contratual; (ii) sejam observados os limites e os critérios estabelecidos pela ANS; e (iii) não sejam aplicados percentuais desarrazoados ou aleatórios que, concretamente e em desfavor do consumidor idoso, onerem excessivamente a manutenção do contrato.",
+      "link": "https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?novaConsulta=true&tipo_pesquisa=T&cod_tema_inicial=952&cod_tema_final=952"
+    },
+    "tema_1016_stj": {
+      "tribunal": "STJ",
+      "tema": "Tema Repetitivo 1016",
+      "tese": "Nos planos de saúde coletivos, mesmo quando contratados por pessoa jurídica com menos de 30 beneficiários, aplica-se a tese fixada no Tema 952/STJ, bem como o CDC, observadas as peculiaridades do contrato coletivo.",
+      "link": "https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?novaConsulta=true&tipo_pesquisa=T&cod_tema_inicial=1016&cod_tema_final=1016"
+    },
+    "irdr_11_tjsp": {
+      "tribunal": "TJSP — Turma Especial de Direito Privado",
+      "tema": "IRDR nº 11 — Reajuste por faixa etária",
+      "tese": "A variação acumulada entre a 7ª e a 10ª faixas etárias deve ser apurada pela razão entre os valores final e inicial das mensalidades, e não pela simples soma aritmética dos percentuais aplicados em cada transição. A apuração por soma aritmética é metodologicamente incorreta e pode mascarar abusividade.",
+      "link": "https://www.tjsp.jus.br/Noticias/Noticia?codigoNoticia=58712"
+    },
+    "stf_2025_idoso": {
+      "tribunal": "STF",
+      "data": "2025-10-08",
+      "tese": "É vedado o reajuste de mensalidade de plano de saúde por mudança de faixa etária para beneficiários com 60 anos ou mais, ainda que o contrato tenha sido celebrado antes da vigência do Estatuto da Pessoa Idosa, desde que o beneficiário conte com 10 (dez) ou mais anos de vínculo com o plano.",
+      "link": "https://portal.stf.jus.br/"
+    },
+    "sumula_608_stj": {
+      "tribunal": "STJ",
+      "enunciado": "Aplica-se o Código de Defesa do Consumidor aos contratos de plano de saúde, salvo os administrados por entidades de autogestão.",
+      "link": "https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias-antigas/2018/2018-04-12_07-49_Aprovada-sumula-aplicacao-do-CDC-aos-planos-de-saude.aspx"
+    }
+  }
+}
