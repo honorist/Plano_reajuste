@@ -150,7 +150,7 @@ function blocoModulo(resultado, tituloModulo) {
 
 /**
  * @param {EntradaRelatorio} entrada
- * @returns {Promise<Buffer>}
+ * @returns {Promise<Uint8Array>}
  */
 export async function gerarRelatorioDocx(entrada) {
   const c = entrada.dadosCaso;
@@ -286,5 +286,6 @@ export async function gerarRelatorioDocx(entrada) {
     ],
   });
 
-  return await Packer.toBuffer(doc);
+  const blob = await Packer.toBlob(doc);
+  return new Uint8Array(await blob.arrayBuffer());
 }

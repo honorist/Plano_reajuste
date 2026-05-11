@@ -113,7 +113,7 @@ function modulosAbusivos(entrada) {
 
 /**
  * @param {EntradaPeticao} entrada
- * @returns {Promise<Buffer>}
+ * @returns {Promise<Uint8Array>}
  */
 export async function gerarPeticaoDocx(entrada) {
   const c = entrada.dadosCaso;
@@ -634,7 +634,8 @@ export async function gerarPeticaoDocx(entrada) {
     ],
   });
 
-  return await Packer.toBuffer(doc);
+  const blob = await Packer.toBlob(doc);
+  return new Uint8Array(await blob.arrayBuffer());
 }
 
 /**

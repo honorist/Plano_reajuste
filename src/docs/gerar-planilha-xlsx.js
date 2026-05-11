@@ -205,7 +205,7 @@ function preencherCapa(aba, entrada) {
  * Gera a planilha XLSX como buffer (Uint8Array).
  *
  * @param {EntradaPlanilha} entrada
- * @returns {Promise<Buffer>}
+ * @returns {Promise<Uint8Array>}
  */
 export async function gerarPlanilhaXlsx(entrada) {
   const wb = new ExcelJS.Workbook();
@@ -245,5 +245,5 @@ export async function gerarPlanilhaXlsx(entrada) {
   }
 
   const buffer = await wb.xlsx.writeBuffer();
-  return Buffer.from(buffer);
+  return new Uint8Array(/** @type {ArrayBuffer} */ (buffer));
 }
