@@ -162,7 +162,7 @@ export async function gerarRelatorioDocx(entrada) {
   /** @type {Paragraph[]} */
   const corpo = [];
 
-  // ── Cabeçalho visual: logo + contatos ───────────────────────────────────
+  // ── Cabeçalho visual: banner logo (fundo azul) + contatos ──────────────
   const logoBytes = await getLogoAzulBytes();
 
   if (logoBytes.length > 0) {
@@ -172,28 +172,24 @@ export async function gerarRelatorioDocx(entrada) {
           new ImageRun({
             type: "png",
             data: logoBytes,
-            transformation: { width: 200, height: 100 },
+            transformation: { width: 600, height: 338 },
           }),
         ],
         alignment: AlignmentType.CENTER,
-        spacing: { after: 80 },
+        spacing: { before: 0, after: 0 },
       }),
     );
   } else {
     corpo.push(
       new Paragraph({
-        children: [
-          new TextRun({ text: "JULIANA RAMOS", bold: true, size: 32, color: "003B49", font: "Calibri" }),
-        ],
+        children: [new TextRun({ text: "JULIANA RAMOS", bold: true, size: 32, color: "003B49", font: "Calibri" })],
         alignment: AlignmentType.CENTER,
         spacing: { after: 60 },
       }),
     );
     corpo.push(
       new Paragraph({
-        children: [
-          new TextRun({ text: "ADVOCACIA & CONSULTORIA JURÍDICA", size: 18, color: "003B49", font: "Calibri", characterSpacing: 60 }),
-        ],
+        children: [new TextRun({ text: "ADVOCACIA & CONSULTORIA JURÍDICA", size: 18, color: "003B49", font: "Calibri", characterSpacing: 60 })],
         alignment: AlignmentType.CENTER,
         spacing: { after: 80 },
       }),
@@ -204,24 +200,27 @@ export async function gerarRelatorioDocx(entrada) {
   const linkRun = (text, url) =>
     new ExternalHyperlink({
       link: url,
-      children: [new TextRun({ text, color: "0563C1", underline: { type: UnderlineType.SINGLE }, font: "Calibri", size: 18 })],
+      children: [new TextRun({ text, color: "0563C1", underline: { type: UnderlineType.SINGLE }, font: "Calibri", size: 17 })],
     });
 
   corpo.push(
     new Paragraph({
       children: [
-        new TextRun({ text: "E-mail: ", bold: true, font: "Calibri", size: 18 }),
+        new TextRun({ text: "✉ ", font: "Segoe UI Symbol", size: 17, color: "003B49" }),
         linkRun(CONTATOS.email, CONTATOS.emailUrl),
-        new TextRun({ text: "   |   WhatsApp: ", bold: true, font: "Calibri", size: 18 }),
+        new TextRun({ text: "   |   ", font: "Calibri", size: 17, color: "999999" }),
+        new TextRun({ text: "📱 ", font: "Segoe UI Symbol", size: 17, color: "003B49" }),
         linkRun(CONTATOS.whatsapp, CONTATOS.whatsappUrl),
-        new TextRun({ text: "   |   ", font: "Calibri", size: 18 }),
+        new TextRun({ text: "   |   ", font: "Calibri", size: 17, color: "999999" }),
+        new TextRun({ text: "🌐 ", font: "Segoe UI Symbol", size: 17, color: "003B49" }),
         linkRun(CONTATOS.web, CONTATOS.webUrl),
-        new TextRun({ text: "   |   Instagram: ", bold: true, font: "Calibri", size: 18 }),
+        new TextRun({ text: "   |   ", font: "Calibri", size: 17, color: "999999" }),
+        new TextRun({ text: "📷 ", font: "Segoe UI Symbol", size: 17, color: "003B49" }),
         linkRun(CONTATOS.instagram, CONTATOS.instagramUrl),
       ],
       alignment: AlignmentType.CENTER,
-      spacing: { after: 240 },
-      border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "003B49", space: 8 } },
+      spacing: { before: 120, after: 320 },
+      border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: "D6C4B8", space: 10 } },
     }),
   );
   corpo.push(

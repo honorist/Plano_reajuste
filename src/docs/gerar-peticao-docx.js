@@ -127,72 +127,73 @@ export async function gerarPeticaoDocx(entrada) {
   /** @type {Paragraph[]} */
   const corpo = [];
 
-  // ── Cabeçalho visual: logo + contatos ───────────────────────────────────
+  // ── Cabeçalho visual: banner logo (fundo azul) + contatos ──────────────
   const logoBytes = await getLogoAzulBytes();
 
   if (logoBytes.length > 0) {
+    // Banner full-width: logo off com fundo azul da marca (1920x1080 → 600x338)
     corpo.push(
       new Paragraph({
         children: [
           new ImageRun({
             type: "png",
             data: logoBytes,
-            transformation: { width: 200, height: 100 },
+            transformation: { width: 600, height: 338 },
           }),
         ],
         alignment: AlignmentType.CENTER,
-        spacing: { after: 80 },
+        spacing: { before: 0, after: 0 },
       }),
     );
   } else {
     corpo.push(
       new Paragraph({
-        children: [
-          new TextRun({ text: "JULIANA RAMOS ADVOCACIA & CONSULTORIA JURÍDICA", bold: true, size: 26, color: "003B49", font: "Times New Roman" }),
-        ],
+        children: [new TextRun({ text: "JULIANA RAMOS ADVOCACIA & CONSULTORIA JURÍDICA", bold: true, size: 26, color: "003B49", font: "Times New Roman" })],
         alignment: AlignmentType.CENTER,
         spacing: { after: 80 },
       }),
     );
   }
 
+  // Faixa de contatos com hyperlinks
   /** @param {string} text @param {string} url */
   const linkRun = (text, url) =>
     new ExternalHyperlink({
       link: url,
-      children: [new TextRun({ text, color: "0563C1", underline: { type: UnderlineType.SINGLE }, font: "Times New Roman", size: 18 })],
+      children: [new TextRun({ text, color: "0563C1", underline: { type: UnderlineType.SINGLE }, font: "Times New Roman", size: 17 })],
     });
 
   corpo.push(
     new Paragraph({
       children: [
-        new TextRun({ text: "E-mail: ", bold: true, font: "Times New Roman", size: 18 }),
+        new TextRun({ text: "✉ ", font: "Segoe UI Symbol", size: 17, color: "003B49" }),
         linkRun(CONTATOS.email, CONTATOS.emailUrl),
-        new TextRun({ text: "   |   WhatsApp: ", bold: true, font: "Times New Roman", size: 18 }),
+        new TextRun({ text: "   |   ", font: "Times New Roman", size: 17, color: "999999" }),
+        new TextRun({ text: "📱 ", font: "Segoe UI Symbol", size: 17, color: "003B49" }),
         linkRun(CONTATOS.whatsapp, CONTATOS.whatsappUrl),
-        new TextRun({ text: "   |   ", font: "Times New Roman", size: 18 }),
+        new TextRun({ text: "   |   ", font: "Times New Roman", size: 17, color: "999999" }),
+        new TextRun({ text: "🌐 ", font: "Segoe UI Symbol", size: 17, color: "003B49" }),
         linkRun(CONTATOS.web, CONTATOS.webUrl),
-        new TextRun({ text: "   |   Instagram: ", bold: true, font: "Times New Roman", size: 18 }),
+        new TextRun({ text: "   |   ", font: "Times New Roman", size: 17, color: "999999" }),
+        new TextRun({ text: "📷 ", font: "Segoe UI Symbol", size: 17, color: "003B49" }),
         linkRun(CONTATOS.instagram, CONTATOS.instagramUrl),
       ],
       alignment: AlignmentType.CENTER,
-      spacing: { after: 240 },
-      border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "003B49", space: 8 } },
+      spacing: { before: 120, after: 320 },
+      border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: "D6C4B8", space: 10 } },
     }),
   );
 
   if (c.advogadoOAB) {
     corpo.push(
       new Paragraph({
-        children: [
-          new TextRun({ text: `${c.advogadoNome ?? ""} — ${c.advogadoOAB}`, size: 18, font: "Times New Roman", color: "475569" }),
-        ],
+        children: [new TextRun({ text: `${c.advogadoNome ?? ""} — ${c.advogadoOAB}`, size: 18, font: "Times New Roman", color: "475569" })],
         alignment: AlignmentType.CENTER,
         spacing: { after: 480 },
       }),
     );
   } else {
-    corpo.push(new Paragraph({ children: [], spacing: { after: 480 } }));
+    corpo.push(new Paragraph({ children: [], spacing: { after: 320 } }));
   }
 
   // ── Endereçamento ──────────────────────────────────────────────────────

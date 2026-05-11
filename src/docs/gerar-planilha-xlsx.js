@@ -135,12 +135,13 @@ function preencherCapa(wb, aba, entrada, logoB64) {
   // Logo no topo
   if (logoB64) {
     const imageId = wb.addImage({ base64: logoB64, extension: "png" });
+    // Banner full-width: logo 1920x1080 escalado para ~26cm × 14.6cm
     aba.addImage(imageId, {
       tl: { col: 0, row: 0 },
-      ext: { width: 220, height: 110 },
+      ext: { width: 980, height: 551 },
     });
-    aba.getRow(1).height = 82;
-    aba.getRow(2).height = 18;
+    aba.getRow(1).height = 207; // ~7.3cm = 551px / 75dpi
+    aba.getRow(2).height = 207;
     // Linhas 1-2 reservadas para o logo
     aba.getCell("A1").value = "";
     aba.getCell("A2").value = "";
