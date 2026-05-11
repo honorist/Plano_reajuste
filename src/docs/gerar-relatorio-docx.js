@@ -15,7 +15,11 @@ import {
   HeadingLevel,
   AlignmentType,
   BorderStyle,
+  ImageRun,
+  ExternalHyperlink,
+  UnderlineType,
 } from "docx";
+import { getLogoAzulBytes, CONTATOS } from "./logo.js";
 
 /**
  * @typedef {import("../calc/modulo1-reajuste-anual.js").ResultadoCalculo} ResultadoCalculo
@@ -158,35 +162,66 @@ export async function gerarRelatorioDocx(entrada) {
   /** @type {Paragraph[]} */
   const corpo = [];
 
-  // Cabeçalho — marca Juliana Ramos Advocacia
+  // ── Cabeçalho visual: logo + contatos ───────────────────────────────────
+  const logoBytes = await getLogoAzulBytes();
+
+  if (logoBytes.length > 0) {
+    corpo.push(
+      new Paragraph({
+        children: [
+          new ImageRun({
+            type: "png",
+            data: logoBytes,
+            transformation: { width: 200, height: 100 },
+          }),
+        ],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 80 },
+      }),
+    );
+  } else {
+    corpo.push(
+      new Paragraph({
+        children: [
+          new TextRun({ text: "JULIANA RAMOS", bold: true, size: 32, color: "003B49", font: "Calibri" }),
+        ],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 60 },
+      }),
+    );
+    corpo.push(
+      new Paragraph({
+        children: [
+          new TextRun({ text: "ADVOCACIA & CONSULTORIA JURÍDICA", size: 18, color: "003B49", font: "Calibri", characterSpacing: 60 }),
+        ],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 80 },
+      }),
+    );
+  }
+
+  /** @param {string} text @param {string} url */
+  const linkRun = (text, url) =>
+    new ExternalHyperlink({
+      link: url,
+      children: [new TextRun({ text, color: "0563C1", underline: { type: UnderlineType.SINGLE }, font: "Calibri", size: 18 })],
+    });
+
   corpo.push(
     new Paragraph({
       children: [
-        new TextRun({
-          text: "JULIANA RAMOS",
-          bold: true,
-          size: 32,
-          color: "003B49",
-          font: "Calibri",
-        }),
+        new TextRun({ text: "E-mail: ", bold: true, font: "Calibri", size: 18 }),
+        linkRun(CONTATOS.email, CONTATOS.emailUrl),
+        new TextRun({ text: "   |   WhatsApp: ", bold: true, font: "Calibri", size: 18 }),
+        linkRun(CONTATOS.whatsapp, CONTATOS.whatsappUrl),
+        new TextRun({ text: "   |   ", font: "Calibri", size: 18 }),
+        linkRun(CONTATOS.web, CONTATOS.webUrl),
+        new TextRun({ text: "   |   Instagram: ", bold: true, font: "Calibri", size: 18 }),
+        linkRun(CONTATOS.instagram, CONTATOS.instagramUrl),
       ],
       alignment: AlignmentType.CENTER,
-      spacing: { after: 60 },
-    }),
-  );
-  corpo.push(
-    new Paragraph({
-      children: [
-        new TextRun({
-          text: "ADVOCACIA & CONSULTORIA JURÍDICA",
-          size: 18,
-          color: "003B49",
-          font: "Calibri",
-          characterSpacing: 60,
-        }),
-      ],
-      alignment: AlignmentType.CENTER,
-      spacing: { after: 360 },
+      spacing: { after: 240 },
+      border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "003B49", space: 8 } },
     }),
   );
   corpo.push(

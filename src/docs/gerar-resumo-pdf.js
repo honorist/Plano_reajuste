@@ -4,8 +4,9 @@
  * beneficiário (consumidor leigo). Linguagem direta, semáforo de
  * cores e indicação clara dos próximos passos.
  */
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { PDFDocument, StandardFonts, rgb, PDFString, PDFName } from "pdf-lib";
 import { formatarBRL } from "../calc/money.js";
+import { getLogoBrancoBytes, CONTATOS } from "./logo.js";
 
 /**
  * @typedef {import("../calc/modulo1-reajuste-anual.js").ResultadoCalculo} ResultadoCalculo
@@ -42,6 +43,28 @@ function corVeredito(v) {
 }
 
 /**
+ * Adiciona annotation de link clicável a uma área da página.
+ * @param {PDFDocument} pdf
+ * @param {import('pdf-lib').PDFPage} page
+ * @param {number} x1 @param {number} y1 @param {number} x2 @param {number} y2
+ * @param {string} url
+ */
+function adicionarLink(pdf, page, x1, y1, x2, y2, url) {
+  const linkDict = pdf.context.obj({
+    Type: PDFName.of('Annot'),
+    Subtype: PDFName.of('Link'),
+    Rect: pdf.context.obj([x1, y1, x2, y2]),
+    Border: pdf.context.obj([0, 0, 0]),
+    A: pdf.context.obj({
+      Type: PDFName.of('Action'),
+      S: PDFName.of('URI'),
+      URI: PDFString.of(url),
+    }),
+  });
+  page.node.addAnnot(pdf.context.register(linkDict));
+}
+
+/**
  * @param {EntradaResumoPdf} entrada
  * @returns {Promise<Uint8Array>}
  */
@@ -54,55 +77,61 @@ export async function gerarResumoPdf(entrada) {
   const fontBold = await pdf.embedFont(StandardFonts.HelveticaBold);
   const fontItalic = await pdf.embedFont(StandardFonts.HelveticaOblique);
 
-  let y = height - 40;
   const M = 40; // margem esquerda
 
-  // Cabeçalho azul institucional da marca
-  page.drawRectangle({
-    x: 0,
-    y: height - 100,
-    width,
-    height: 100,
-    color: COR_AZUL,
-  });
-  // Faixa bege fina embaixo do header (assinatura da marca)
-  page.drawRectangle({
-    x: 0,
-    y: height - 104,
-    width,
-    height: 4,
-    color: COR_BEGE,
-  });
-  page.drawText("JULIANA RAMOS", {
-    x: M,
-    y: height - 32,
-    size: 14,
-    font: fontBold,
-    color: COR_OFF,
-  });
-  page.drawText("ADVOCACIA & CONSULTORIA JURÍDICA", {
-    x: M,
-    y: height - 48,
-    size: 8,
-    font: fontReg,
-    color: COR_BEGE,
-  });
-  page.drawText("ANÁLISE DE REAJUSTE DE PLANO DE SAÚDE", {
-    x: M,
-    y: height - 76,
-    size: 13,
-    font: fontBold,
-    color: COR_OFF,
-  });
-  page.drawText("Conformidade com ANS, STJ e STF", {
-    x: M,
-    y: height - 92,
-    size: 9,
-    font: fontReg,
-    color: COR_BEGE,
-  });
+  // ── Cabeçalho azul institucional ────────────────────────────────────────
+  page.drawRectangle({ x: 0, y: height - 100, width, height: 100, color: COR_AZUL });
+  page.drawRectangle({ x: 0, y: height - 104, width, height: 4, color: COR_BEGE });
 
-  y = height - 130;
+  // Logo branco no cabeçalho
+  const logoBytes = await getLogoBrancoBytes();
+  let logoLargura = 0;
+  if (logoBytes.length > 0) {
+    try {
+      const img = await pdf.embedPng(logoBytes);
+      const alturaAlvo = 62;
+      const escala = alturaAlvo / img.height;
+      logoLargura = img.width * escala;
+      page.drawImage(img, {
+        x: M,
+        y: height - 20 - alturaAlvo,
+        width: logoLargura,
+        height: alturaAlvo,
+      });
+    } catch {
+      logoLargura = 0;
+    }
+  }
+
+  // Textos do cabeçalho (à direita do logo)
+  const textX = logoBytes.length > 0 && logoLargura > 0 ? M + logoLargura + 14 : M;
+  page.drawText("JULIANA RAMOS", { x: textX, y: height - 32, size: 14, font: fontBold, color: COR_OFF });
+  page.drawText("ADVOCACIA & CONSULTORIA JURÍDICA", { x: textX, y: height - 48, size: 8, font: fontReg, color: COR_BEGE });
+  page.drawText("ANÁLISE DE REAJUSTE DE PLANO DE SAÚDE", { x: textX, y: height - 72, size: 11, font: fontBold, color: COR_OFF });
+  page.drawText("Conformidade com ANS · STJ · STF", { x: textX, y: height - 86, size: 8, font: fontReg, color: COR_BEGE });
+
+  // ── Faixa de contatos clicáveis ─────────────────────────────────────────
+  const CONTATO_H = 26;
+  const CONTATO_Y = height - 104 - CONTATO_H;
+  page.drawRectangle({ x: 0, y: CONTATO_Y, width, height: CONTATO_H, color: rgb(0.965, 0.941, 0.922) });
+
+  const itensContato = [
+    { label: 'contato@julianaramosadvocacia.com.br', url: CONTATOS.emailUrl },
+    { label: '+55 31 9905-6172 (WhatsApp)', url: CONTATOS.whatsappUrl },
+    { label: 'julianaramosadvocacia.com.br', url: CONTATOS.webUrl },
+    { label: '@julianapirl (Instagram)', url: CONTATOS.instagramUrl },
+  ];
+  const colW = (width - 2 * M) / itensContato.length;
+  const ctY = CONTATO_Y + 9;
+  for (let i = 0; i < itensContato.length; i++) {
+    const cx = M + i * colW;
+    const item = itensContato[i];
+    page.drawText(item.label, { x: cx, y: ctY, size: 7.5, font: fontReg, color: COR_AZUL });
+    const tw = fontReg.widthOfTextAtSize(item.label, 7.5);
+    adicionarLink(pdf, page, cx, ctY - 2, cx + tw, ctY + 9, item.url);
+  }
+
+  let y = height - 104 - CONTATO_H - 18;
 
   // Dados do beneficiário
   page.drawText("BENEFICIÁRIO", {

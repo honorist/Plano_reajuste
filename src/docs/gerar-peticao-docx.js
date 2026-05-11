@@ -16,8 +16,13 @@ import {
   TextRun,
   AlignmentType,
   HeadingLevel,
+  ImageRun,
+  ExternalHyperlink,
+  BorderStyle,
+  UnderlineType,
 } from "docx";
 import { formatarBRL } from "../calc/money.js";
+import { getLogoAzulBytes, CONTATOS } from "./logo.js";
 
 /**
  * @typedef {import("../calc/modulo1-reajuste-anual.js").ResultadoCalculo} ResultadoCalculo
@@ -122,38 +127,73 @@ export async function gerarPeticaoDocx(entrada) {
   /** @type {Paragraph[]} */
   const corpo = [];
 
-  // ── Cabeçalho com a marca do escritório ─────────────────────────────────
+  // ── Cabeçalho visual: logo + contatos ───────────────────────────────────
+  const logoBytes = await getLogoAzulBytes();
+
+  if (logoBytes.length > 0) {
+    corpo.push(
+      new Paragraph({
+        children: [
+          new ImageRun({
+            type: "png",
+            data: logoBytes,
+            transformation: { width: 200, height: 100 },
+          }),
+        ],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 80 },
+      }),
+    );
+  } else {
+    corpo.push(
+      new Paragraph({
+        children: [
+          new TextRun({ text: "JULIANA RAMOS ADVOCACIA & CONSULTORIA JURÍDICA", bold: true, size: 26, color: "003B49", font: "Times New Roman" }),
+        ],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 80 },
+      }),
+    );
+  }
+
+  /** @param {string} text @param {string} url */
+  const linkRun = (text, url) =>
+    new ExternalHyperlink({
+      link: url,
+      children: [new TextRun({ text, color: "0563C1", underline: { type: UnderlineType.SINGLE }, font: "Times New Roman", size: 18 })],
+    });
+
   corpo.push(
     new Paragraph({
       children: [
-        new TextRun({
-          text: "JULIANA RAMOS ADVOCACIA & CONSULTORIA JURÍDICA",
-          bold: true,
-          size: 22,
-          color: "003B49",
-          font: "Times New Roman",
-        }),
+        new TextRun({ text: "E-mail: ", bold: true, font: "Times New Roman", size: 18 }),
+        linkRun(CONTATOS.email, CONTATOS.emailUrl),
+        new TextRun({ text: "   |   WhatsApp: ", bold: true, font: "Times New Roman", size: 18 }),
+        linkRun(CONTATOS.whatsapp, CONTATOS.whatsappUrl),
+        new TextRun({ text: "   |   ", font: "Times New Roman", size: 18 }),
+        linkRun(CONTATOS.web, CONTATOS.webUrl),
+        new TextRun({ text: "   |   Instagram: ", bold: true, font: "Times New Roman", size: 18 }),
+        linkRun(CONTATOS.instagram, CONTATOS.instagramUrl),
       ],
       alignment: AlignmentType.CENTER,
-      spacing: { after: 60 },
+      spacing: { after: 240 },
+      border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "003B49", space: 8 } },
     }),
   );
-  corpo.push(
-    new Paragraph({
-      children: [
-        new TextRun({
-          text: c.advogadoOAB
-            ? `${c.advogadoNome ?? ""} — ${c.advogadoOAB}`
-            : "",
-          size: 18,
-          font: "Times New Roman",
-          color: "475569",
-        }),
-      ],
-      alignment: AlignmentType.CENTER,
-      spacing: { after: 480 },
-    }),
-  );
+
+  if (c.advogadoOAB) {
+    corpo.push(
+      new Paragraph({
+        children: [
+          new TextRun({ text: `${c.advogadoNome ?? ""} — ${c.advogadoOAB}`, size: 18, font: "Times New Roman", color: "475569" }),
+        ],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 480 },
+      }),
+    );
+  } else {
+    corpo.push(new Paragraph({ children: [], spacing: { after: 480 } }));
+  }
 
   // ── Endereçamento ──────────────────────────────────────────────────────
   corpo.push(

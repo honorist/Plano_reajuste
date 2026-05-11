@@ -7,6 +7,7 @@
  * Estrutura: 1 aba por módulo de cálculo + aba consolidada.
  */
 import ExcelJS from "exceljs";
+import { getLogoAzulBytes, bytesToBase64, CONTATOS } from "./logo.js";
 
 /**
  * @typedef {import("../calc/modulo1-reajuste-anual.js").ResultadoCalculo} ResultadoCalculo
@@ -125,22 +126,70 @@ function preencherAbaModulo(aba, resultado, tituloModulo) {
 }
 
 /**
+ * @param {ExcelJS.Workbook} wb
  * @param {ExcelJS.Worksheet} aba
  * @param {EntradaPlanilha} entrada
+ * @param {string} logoB64 base64 do logo (vazio se indisponível)
  */
-function preencherCapa(aba, entrada) {
-  aba.mergeCells("A1:D1");
-  const t = aba.getCell("A1");
-  t.value =
-    "JULIANA RAMOS ADVOCACIA & CONSULTORIA JURÍDICA — Análise de Reajuste de Plano de Saúde";
+function preencherCapa(wb, aba, entrada, logoB64) {
+  // Logo no topo
+  if (logoB64) {
+    const imageId = wb.addImage({ base64: logoB64, extension: "png" });
+    aba.addImage(imageId, {
+      tl: { col: 0, row: 0 },
+      ext: { width: 220, height: 110 },
+    });
+    aba.getRow(1).height = 82;
+    aba.getRow(2).height = 18;
+    // Linhas 1-2 reservadas para o logo
+    aba.getCell("A1").value = "";
+    aba.getCell("A2").value = "";
+  }
+
+  const linhaHeader = logoB64 ? 3 : 1;
+
+  aba.mergeCells(`A${linhaHeader}:D${linhaHeader}`);
+  const t = aba.getCell(`A${linhaHeader}`);
+  t.value = "JULIANA RAMOS ADVOCACIA & CONSULTORIA JURÍDICA — Análise de Reajuste de Plano de Saúde";
   t.font = { bold: true, size: 16, color: { argb: "FFFFFFFF" } };
-  t.fill = {
-    type: "pattern",
-    pattern: "solid",
-    fgColor: { argb: COR_AZUL },
-  };
+  t.fill = { type: "pattern", pattern: "solid", fgColor: { argb: COR_AZUL } };
   t.alignment = { vertical: "middle", horizontal: "center" };
-  aba.getRow(1).height = 28;
+  aba.getRow(linhaHeader).height = 28;
+
+  // Faixa de contatos com hyperlinks
+  const linhaContatos = linhaHeader + 1;
+  aba.mergeCells(`A${linhaContatos}:D${linhaContatos}`);
+  const ctCell = aba.getCell(`A${linhaContatos}`);
+  ctCell.value = {
+    richText: [
+      { text: "E-mail: ", font: { bold: true, size: 9, color: { argb: "FF003B49" } } },
+      { text: CONTATOS.email + "   |   WhatsApp: ", font: { size: 9, color: { argb: "FF0563C1" } } },
+      { text: CONTATOS.whatsapp + "   |   ", font: { size: 9, color: { argb: "FF0563C1" } } },
+      { text: CONTATOS.web + "   |   Instagram: ", font: { size: 9, color: { argb: "FF0563C1" } } },
+      { text: CONTATOS.instagram, font: { size: 9, color: { argb: "FF0563C1" } } },
+    ],
+  };
+  ctCell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFF5EDE6" } };
+  ctCell.alignment = { horizontal: "center", vertical: "middle" };
+  aba.getRow(linhaContatos).height = 18;
+
+  // Hyperlinks individuais em células separadas (coluna E-H ocultas)
+  /** @type {Array<{col: string, text: string, url: string}>} */
+  const links = [
+    { col: "E", text: CONTATOS.email, url: CONTATOS.emailUrl },
+    { col: "F", text: CONTATOS.whatsapp, url: CONTATOS.whatsappUrl },
+    { col: "G", text: CONTATOS.web, url: CONTATOS.webUrl },
+    { col: "H", text: CONTATOS.instagram, url: CONTATOS.instagramUrl },
+  ];
+  for (const l of links) {
+    const c = aba.getCell(`${l.col}${linhaContatos}`);
+    c.value = { text: l.text, hyperlink: l.url };
+    c.font = { color: { argb: "FF0563C1" }, underline: true, size: 9 };
+  }
+  aba.getColumn("E").width = 34;
+  aba.getColumn("F").width = 22;
+  aba.getColumn("G").width = 28;
+  aba.getColumn("H").width = 16;
 
   aba.addRow([]);
   if (entrada.dadosCaso) {
@@ -213,7 +262,10 @@ export async function gerarPlanilhaXlsx(entrada) {
   wb.created = new Date();
   wb.modified = new Date();
 
-  preencherCapa(wb.addWorksheet("Resumo"), entrada);
+  const logoBytes = await getLogoAzulBytes();
+  const logoB64 = logoBytes.length > 0 ? bytesToBase64(logoBytes) : "";
+
+  preencherCapa(wb, wb.addWorksheet("Resumo"), entrada, logoB64);
 
   if (entrada.modulo1) {
     preencherAbaModulo(
